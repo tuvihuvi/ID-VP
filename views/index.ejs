@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="utf-8">
+    <title>Roger Viidalepp, veebiprogrammeerimine</title>
+    <style>
+        body {
+            background-color: rgb(186, 220, 255);
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        nav {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        nav a {
+            text-decoration: underline;
+            color: rgb(255, 0, 132);
+        }
+    </style>
+</head>
+<body>
+
+    <img src="/PICTURE/veebiprogrammeerimine_2026_ID.png" alt="Veebiprogrammeerimine bänner" style="display: block; margin: 0 auto;">
+
+    <nav>
+        <a href="/">Avaleht</a> |
+        <a href="/vanasona">Vanasõna</a> |
+        <a href="/minust">Minust</a> |
+        <a href="/viimane">Viimane külastus</a>
+    </nav>
+
+    <h1>Roger Viidalepp, veebiprogrammeerimine</h1>
+    <p>See leht on loodud veebiprogrammeerimise kursusel <a href="https://www.tlu.ee">Tallinna Ülikoolis</a> ning ei sisalda tõsiseltvõetavat sisu!</p>
+    <p>Täna on <%= dayNow %>, <%= dateNow %> ja kell on <%= timeNow %>.</p>
+    <hr>
+    <h1>Node.js server töötab!</h1>
+
+    <hr style="border: 2px dashed #7700ff78; margin: 40px 0;">
+
+    <h2>Registreeri oma külastus</h2>
+    <form method="POST" action="/regvisit">
+        <label for="inputName">Sisesta oma nimi: </label>
+        <input type="text" id="inputName" name="name" placeholder="Sinu nimi" required>
+        <br>
+        <input type="submit" value="Saada" id="regSubmit">
+    </form>
+
+</body>
+</html>

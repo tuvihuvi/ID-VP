@@ -1,0 +1,28 @@
+{
+  "name": "id-vp",
+  "version": "1.0.0",
+  "description": "õppetöö raames tehtud veeb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tuvihuvi@github.com/tuvihuvi/ID-VP.git"
+  },
+  "keywords": [
+    "tlu",
+    "veeb",
+    "õppetöö"
+  ],
+  "author": "Roger Viidalepp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuvihuvi/ID-VP/issues"
+  },
+  "homepage": "https://github.com/tuvihuvi/ID-VP#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}
