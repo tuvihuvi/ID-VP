@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="utf-8">
+    <title>Roger Viidalepp, veebiprogrammeerimine</title>
+    <style>
+        body {
+            background-color: rgb(186, 220, 255);
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        nav {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        nav a {
+            text-decoration: underline;
+            color: rgb(255, 0, 132);
+        }
+    </style>
+</head>
+<body>
+
+    <img src="/PICTURE/veebiprogrammeerimine_2026_ID.png" alt="Veebiprogrammeerimine bänner" style="display: block; margin: 0 auto;">
+
+    <nav>
+        <a href="/">Avaleht</a> |
+        <a href="/vanasona">Vanasõna</a> |
+        <a href="/minust">Minust</a> |
+        <a href="/eestifilm">Eesti film</a> |
+        <a href="/viimane">Viimane külastus</a>
+    </nav>
+
+	<h1>Lisa Eesti filmiga seotud inimesi</h1>
+	<ul>
+		<li><a href="/">Tagasi avalehele</a></li>
+		<li><a href="/eestifilm/inimesed">Tagasi Eesti filmiga seotud inimesed avalehele</a></li>
+	</ul>
+    <hr>
+    <form method="POST" action="/eestifilm/inimesed_lisa">
+        <label for="firstNameInput">Sisesta filmiinimese eesnimi: </label>
+        <input id="firstNameInput" name="firstNameInput" type="text" placeholder="Eesnimi" required>
+        <br>
+        <label for="lastNameInput">Sisesta filmiinimese perekonnanimi: </label>
+        <input id="lastNameInput" name="lastNameInput" type="text" placeholder="Perekonnanimi" required>
+        <br>
+        <label for="bornInput">Sisesta filmiinimese sünnikuupäev: </label>
+        <input id="bornInput" name="bornInput" type="date" required>
+        <br>
+        <label for="deceasedInput">Sisesta filmiinimese surmakuupäev (kui on): </label>
+        <input id="deceasedInput" name="deceasedInput" type="date">
+        <br>
+        <input type="submit" value="Salvesta">
+    </form>
+    <p><%= notice %></p>
+</body>
+</html>

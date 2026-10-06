@@ -8,6 +8,8 @@ const textRef = path.join(__dirname, 'public', 'txt', 'vanasonad.txt');
 const regtextRef = path.join(__dirname, 'public', 'txt', 'visits.txt');
 
 const app = express();
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 // Renderdusmootor EJS
 app.set('view engine', 'ejs');
@@ -87,6 +89,74 @@ app.get('/viimane', async (req, res) => {
         res.render('viimane', {tekst: puudub});
     }
 });
+
+// MARSRUUT: Eesti film  ->  views/eestifilm.ejs
+app.get('/eestifilm', (req, res) => {
+    res.render('eestifilm');
+});
+
+app.get('/eestifilm/inimesed', async (req, res)=>{
+    let conn;
+    try {
+        conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_DATABASE
+        });
+        // defineerime SQL päringu
+        let sqlReq = 'SELECT * FROM person';
+        const [sqlRes] = await conn.execute(sqlReq);
+        res.render('eestifilminimesed', {personList: sqlRes});
+    }
+    finally {
+        if (conn) {
+            await conn.end();
+        }
+    }
+});
+
+app.get('/eestifilm/inimesed_lisa', (req, res) => {
+    console.log(req.body);
+    res.render('eestifilminimesed_lisa', {notice: 'Ootan sisestamist'});
+
+});
+
+app.post('/eestifilm/inimesed_lisa', async (req, res) => {
+    console.log(req.body);
+    const bornDate = new Date(req.body.bornInput);
+    const timeNow = new Date();
+    if(!req.body.firstNameInput || !req.body.lastNameInput || !req.body.bornInput || isNaN(bornDate.getTime()) || bornDate > timeNow) {
+        console.log("Andmed pole korrektsed!");
+        return res.render('eestifilminimesed_lisa', {notice: 'Andmed pole korrektsed!'});
+    }
+    let deceasedDate = null
+    if(req.body.deceasedInput != ''){
+        deceasedDate = req.body.deceasedInput;
+    }
+    let conn;
+    try {
+        conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_DATABASE
+        });
+        let sqlReq = 'INSERT INTO person (first_name, last_name, born, deceased) VALUES (?, ?, ?, ?)';
+        await conn.execute(sqlReq, [req.body.firstNameInput, req.body.lastNameInput, req.body.bornInput, deceasedDate]);
+        res.render('eestifilminimesed_lisa', {notice: req.body.firstNameInput + ' ' + req.body.lastNameInput + ' on lisatud!'});
+    }
+    catch (err) {
+        console.log('Viga!' + err);
+        res.render('eestifilminimesed_lisa', {notice: 'Andmed ei ole lisatud!'});
+    }
+    finally {
+        if (conn) {
+            await conn.end();
+        }
+    }
+});
+
 
 // Serveri käivitamine
 app.listen(5216, () => {

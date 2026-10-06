@@ -33,13 +33,17 @@
         <a href="/viimane">Viimane külastus</a>
     </nav>
 
-    <h1>Minust</h1>
-    <p style="font-size: 20px;">Siin on natuke infot minust.</p>
-    <hr>
-    <h2 style="font-size: 28px; font-weight: normal;">Minu nimi on Roger Viidalepp. Olen 19 aastane ja õpin Tallinna Ülikoolis. Tulin TLÜ-sse õppima, et arendada oma digi ja programmeerimise oskusi.</h2>
-    <div>
-        <img src="/PICTURE/Nyancat.gif" alt="Nyan Cat" style="max-width: 400px; border-radius: 8px; margin-top: 15px;">
-    </div>
+	<h1>Eesti filmiga seotud inimesed</h1>
+	<ul>
+		<li><a href="/">Tagasi avalehele</a></li>
+		<li><a href="/eestifilm">Tagasi Eesti filmi avalehele</a></li>
+	</ul>
+	<hr>
+    <ol>
+        <% personList.forEach(function(person) { %>
+            <li><%= person.first_name %> <%= person.last_name %>, sündinud <%= person.born.toLocaleDateString('et-EE', {day: '2-digit', month: '2-digit', year: 'numeric'}) %></li>
+        <% }); %>
+    </ol>
 
 </body>
 </html>
